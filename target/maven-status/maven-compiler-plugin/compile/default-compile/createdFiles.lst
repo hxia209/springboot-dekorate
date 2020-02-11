@@ -1,8 +1,0 @@
-META-INF/dekorate/.config/s2i.yml
-com/example/hello/HelloApplication.class
-META-INF/dekorate/.config/springapplication.yml
-com/example/hello/HelloController.class
-META-INF/dekorate/.project.yml
-META-INF/dekorate/.config/openshift.yml
-META-INF/dekorate/openshift.json
-META-INF/dekorate/openshift.yml
