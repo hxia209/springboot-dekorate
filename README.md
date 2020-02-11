@@ -28,3 +28,35 @@ For further reference, please consider the following sections:
 
 * [Dekorate Getting Started Page](https://dekorate.io/getting-started)
 
+| **Property**                                       | **Type**                      | **Description** | **Default Value** |
+|---|:---|:---|---|
+| dekorate.openshift.group                           | String                        |             |               |
+| dekorate.openshift.name                            | String                        |             |               |
+| dekorate.openshift.version                         | String                        |             |               |
+| dekorate.openshift.init-containers                 | Container[]                   |             |               |
+| dekorate.openshift.labels                          | Label[]                       |             |               |
+| dekorate.openshift.annotations                     | Annotation[]                  |             |               |
+| dekorate.openshift.env-vars                        | Env[]                         |             |               |
+| dekorate.openshift.working-dir                     | String                        |             |               |
+| dekorate.openshift.command                         | String[]                      |             |               |
+| dekorate.openshift.arguments                       | String[]                      |             |               |
+| dekorate.openshift.replicas                        | int                           |             | 1             |
+| dekorate.openshift.service-account                 | String                        |             |               |
+| dekorate.openshift.host                            | String                        |             |               |
+| dekorate.openshift.ports                           | Port[]                        |             |               |
+| dekorate.openshift.service-type                    | ServiceType                   |             | ClusterIP     |
+| dekorate.openshift.pvc-volumes                     | PersistentVolumeClaimVolume[] |             |               |
+| dekorate.openshift.secret-volumes                  | SecretVolume[]                |             |               |
+| dekorate.openshift.config-map-volumes              | ConfigMapVolume[]             |             |               |
+| dekorate.openshift.git-repo-volumes                | GitRepoVolume[]               |             |               |
+| dekorate.openshift.aws-elastic-block-store-volumes | AwsElasticBlockStoreVolume[]  |             |               |
+| dekorate.openshift.azure-disk-volumes              | AzureDiskVolume[]             |             |               |
+| dekorate.openshift.azure-file-volumes              | AzureFileVolume[]             |             |               |
+| dekorate.openshift.mounts                          | Mount[]                       |             |               |
+| dekorate.openshift.image-pull-policy               | ImagePullPolicy               |             | IfNotPresent  |
+| dekorate.openshift.image-pull-secrets              | String[]                      |             |               |
+| dekorate.openshift.liveness-probe                  | Probe                         |             | ( see Probe ) |
+| dekorate.openshift.readiness-probe                 | Probe                         |             | ( see Probe ) |
+| dekorate.openshift.sidecars                        | Container[]                   |             |               |
+| dekorate.openshift.expose                          | boolean                       |             | false         |
+| dekorate.openshift.auto-deploy-enabled             | boolean                       |             | false         |
