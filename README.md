@@ -20,6 +20,9 @@ To deploy the application (requires an running Openshift instance):
 
 `mvn clean package -Ddekorate.deploy=true`
 
+You can add extra configurations via [application.properties](./src/main/resources/application.properties) or annotating it directly into the application.
+All available configurations can be found [here](http://dekorate.io/dekorate/assets/config.html).
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
