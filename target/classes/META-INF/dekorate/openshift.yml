@@ -1,0 +1,107 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  labels:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  name: "hello"
+spec:
+  ports:
+  - name: "http"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  type: "ClusterIP"
+---
+apiVersion: "image.openshift.io/v1"
+kind: "ImageStream"
+metadata:
+  labels:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  name: "hello"
+spec: {}
+---
+apiVersion: "image.openshift.io/v1"
+kind: "ImageStream"
+metadata:
+  labels:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  name: "s2i-java"
+spec:
+  dockerImageRepository: "fabric8/s2i-java"
+---
+apiVersion: "build.openshift.io/v1"
+kind: "BuildConfig"
+metadata:
+  labels:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  name: "hello"
+spec:
+  output:
+    to:
+      kind: "ImageStreamTag"
+      name: "hello:0.0.1-SNAPSHOT"
+  source:
+    binary: {}
+  strategy:
+    sourceStrategy:
+      from:
+        kind: "ImageStreamTag"
+        name: "s2i-java:2.3"
+---
+apiVersion: "apps.openshift.io/v1"
+kind: "DeploymentConfig"
+metadata:
+  labels:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  name: "hello"
+spec:
+  replicas: 1
+  selector:
+    app: "hello"
+    version: "0.0.1-SNAPSHOT"
+    group: "hxia"
+  template:
+    metadata:
+      labels:
+        app: "hello"
+        version: "0.0.1-SNAPSHOT"
+        group: "hxia"
+    spec:
+      containers:
+      - env:
+        - name: "KUBERNETES_NAMESPACE"
+          valueFrom:
+            fieldRef:
+              fieldPath: "metadata.namespace"
+        - name: "JAVA_APP_JAR"
+          value: "/deployments/hello-0.0.1-SNAPSHOT.jar"
+        image: ""
+        imagePullPolicy: "IfNotPresent"
+        name: "hello"
+        ports:
+        - containerPort: 8080
+          name: "http"
+          protocol: "TCP"
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - "hello"
+      from:
+        kind: "ImageStreamTag"
+        name: "hello:0.0.1-SNAPSHOT"
+    type: "ImageChange"
