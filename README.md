@@ -20,6 +20,16 @@ To deploy the application (requires an running Openshift instance):
 
 `mvn clean package -Ddekorate.deploy=true`
 
+Dekorate generates the following Openshift objects:
+
+* _Service_
+* fabric8/s2i-java _ImageStream_
+* Your application _ImageStream_
+* _BuildConfig_ where _sourceStrategy_ points to fabric8/s2i-java IS and outputs to your application's IS
+* _DeploymentConfig_ with a trigger of _ImageChange_ type
+* Optional _Route_ if service expose property is set to true
+
+
 You can add extra configurations via [application.properties](./src/main/resources/application.properties) or annotating it directly into the application.
 All available configurations can be found [here](http://dekorate.io/dekorate/assets/config.html).
 
